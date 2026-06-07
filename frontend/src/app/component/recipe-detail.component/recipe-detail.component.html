@@ -1,0 +1,9 @@
+<div >
+  <h2>{{ recipe.title }}</h2>
+  <p>{{ recipe.description }}</p>
+  <p>ID: {{ recipe.id }}</p>
+</div>
+
+<div *ngIf="loading">⏳ Učitavanje...</div>
+<div *ngIf="error" class="error">{{ error }}</div>
+

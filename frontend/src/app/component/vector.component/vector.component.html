@@ -1,0 +1,57 @@
+<div class="vector-container">
+  <h2>Upravljanje vektorima</h2>
+
+  <!-- 1️⃣ Kreiranje kolekcije -->
+  <section class="vector-section">
+    <h3>Kreiraj kolekciju</h3>
+    <form (ngSubmit)="onCreateVector()" class="vector-form">
+        <div>
+         <label>Naziv recepta:</label>
+         <input type="text" [(ngModel)]="params.title" name="title" placeholder="Naziv" required />
+        </div>
+
+        <div>
+         <label>Opis recepta:</label>
+         <input type="text" [(ngModel)]="params.description" name="description" placeholder="npr. Opis"  required />
+        </div>
+
+       
+        <div>
+         <label>Ime kolekcije:</label>
+         <input type="text" [(ngModel)]="params.collectionName" name="collectionName" placeholder="npr. Proba5" required />
+        </div>
+        
+      <button type="submit" [disabled]="loadingCreate">Kreiraj</button>
+    </form>
+
+    <div *ngIf="messageCreate" class="message">{{ messageCreate }}</div>
+    <div *ngIf="errorCreate" class="error">{{ errorCreate }}</div>
+  </section>
+
+    <hr /> 
+
+
+<section class="vector-section">
+    <h3>Brisanje recepta</h3>
+    <form (ngSubmit)="onDropVector()" class="vector-form">
+
+        <div>
+         <label>Opis recepta:</label>
+         <input type="text" [(ngModel)]="dropParams.id" name="id" placeholder="npr. ID"  required />
+        </div>
+
+       
+        <div>
+         <label>Ime kolekcije:</label>
+         <input type="text" [(ngModel)]="dropParams.collectionName" name="collectionName" placeholder="npr. Proba5" required />
+        </div>
+        
+      <button type="submit" [disabled]="loadingCreate">Kreiraj</button>
+    </form>
+
+    <div *ngIf="messageDrop" class="message">{{ messageDrop }}</div>
+    <div *ngIf="errorDrop" class="error">{{ errorDrop }}</div>
+  </section>
+
+    <hr /> 
+</div>

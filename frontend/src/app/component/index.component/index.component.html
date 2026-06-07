@@ -1,0 +1,89 @@
+<div class="index-container">
+  <h2>Upravljanje indeksima</h2>
+
+  
+  <section class="index-section">
+    <h3>Kreiraj indeks</h3>
+    <form (ngSubmit)="onCreateIndex()" class="index-form">
+      <div class="form-group">
+        <label>Naziv kolekcije:</label>
+        <input type="text" [(ngModel)]="createParams.collectionName" name="createCollection" required />
+      </div>
+      <div class="form-group">
+        <label>Polje:</label>
+        <input type="text" [(ngModel)]="createParams.fieldName" name="createField" required />
+      </div>
+      <div class="form-group">
+        <label>Naziv indeksa:</label>
+        <input type="text" [(ngModel)]="createParams.indexName" name="createIndexName" required />
+      </div>
+      <div class="form-group">  
+        <label>Metric type:</label>
+        <select [(ngModel)]="createParams.metricType" name="createMetricType">
+          <option value="L2">L2 (Euclidean)</option>
+          <option value="COSINE">Cosine</option>
+          <option value="IP">Inner Product</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Index type:</label>
+        <select [(ngModel)]="createParams.indexType" name="createIndexType">
+          <option value="IVF_FLAT">IVF_FLAT</option>
+          <option value="IVF_SQ8">IVF_SQ8</option>
+          <option value="HNSW">HNSW</option>
+        </select>
+      </div>
+      <button type="submit" [disabled]="loadingCreate">Kreiraj indeks</button>
+    </form>
+    <div *ngIf="messageCreate" class="messageCreate">{{ messageCreate }}</div>
+    <div *ngIf="errorCreate" class="errorCreate">{{ errorCreate }}</div>
+  </section>
+
+  <hr />
+
+  
+  <section class="index-section">
+    <h3>Provera indeksa</h3>
+
+  <form (ngSubmit)="onListIndexes()" class="index-form">
+    <label>Naziv kolekcije:</label>
+    <input type="text" [(ngModel)]="listParams.collectionName" name="collectionName" required />
+
+    <label>Polje:</label>
+    <input type="text" [(ngModel)]="listParams.fieldName" name="fieldName" required />
+
+    <button type="submit" [disabled]="loadingList">Proveri indeks</button>
+  </form>
+
+  <div *ngIf="loadingList">⏳ U toku...</div>
+  <div *ngIf="errorList" class="errorList">{{ errorList }}</div>
+
+
+  <div *ngIf="indexes">
+     Ime indeksa: <strong>{{ indexes }}</strong>
+   
+  </div>
+  <div *ngIf="indexes === null && !loadingList">
+    ⚠️ Indeks ne postoji za ovo polje.
+  </div>
+  </section>
+
+  <hr />
+
+  
+  <section class="index-section">
+    <h3>Obriši indeks</h3>
+    <form (ngSubmit)="onDropIndex()" class="index-form">
+      <div class="form-group">
+        <label>Naziv kolekcije:</label>
+        <input type="text" [(ngModel)]="dropParams.collectionName" name="dropCollection" required />
+      </div>
+      <div class="form-group">
+        <label>Naziv indeksa:</label>
+        <input type="text" [(ngModel)]="dropParams.indexName" name="dropIndex" required />
+      </div>
+      <button type="submit" [disabled]="loadingDrop">Obriši indeks</button>
+    </form>
+    <div *ngIf="messageDrop" class="messageDrop">{{ messageDrop }}</div>
+  </section>
+</div>

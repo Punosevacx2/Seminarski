@@ -1,0 +1,81 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgba(77, 168, 255, 0.18), transparent 35%),
+    radial-gradient(circle at top right, rgba(110, 231, 183, 0.16), transparent 30%),
+    radial-gradient(circle at bottom right, rgba(167, 139, 250, 0.16), transparent 35%),
+    linear-gradient(180deg, #f8fbff 0%, #eef6ff 50%, #f7f4ff 100%);
+  color: #2b3a55;
+  font-family: 'Poppins', sans-serif;
+}
+
+.container {
+  flex: 1;
+  width: 100%;
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 2rem;
+  box-sizing: border-box;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(77, 168, 255, 0.14);
+  box-shadow:
+    0 10px 30px rgba(77, 168, 255, 0.10),
+    0 6px 18px rgba(167, 139, 250, 0.08);
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.82);
+    box-shadow:
+      0 14px 36px rgba(77, 168, 255, 0.14),
+      0 8px 22px rgba(110, 231, 183, 0.10);
+    transform: translateY(-2px);
+  }
+
+  @media (max-width: 768px) {
+    padding: 1.5rem;
+    margin: 1rem;
+    border-radius: 18px;
+  }
+}
+
+/* Scrollbar styling aligned with logo palette */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #4da8ff, #6ee7b7, #a78bfa);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(77, 168, 255, 0.08);
+  border-radius: 10px;
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-bottom: 1.5rem;
+}
+
+.app-logo {
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+}
+
+.app-title {
+  font-size: 2rem;
+  font-weight: 600;
+  background: linear-gradient(90deg, #4da8ff, #6ee7b7, #a78bfa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

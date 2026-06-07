@@ -1,0 +1,52 @@
+<div class="collection-container">
+  <h2>Upravljanje kolekcijama</h2>
+
+  <!-- 1️⃣ Kreiranje kolekcije -->
+  <section class="collection-section">
+    <h3>Kreiraj kolekciju</h3>
+    <form (ngSubmit)="onCreateCollection()" class="collection-form">
+      <label>Naziv kolekcije:</label>
+      <input type="text" [(ngModel)]="createParams.name" name="createCollection" required />
+      <button type="submit" [disabled]="loadingCreate">Kreiraj</button>
+    </form>
+
+    <div *ngIf="messageCreate" class="message">{{ messageCreate }}</div>
+    <div *ngIf="errorCreate" class="error">{{ errorCreate }}</div>
+  </section>
+
+  <hr />
+
+  <!-- 2️⃣ Lista kolekcija -->
+  <section class="collection-section">
+    <h3>Lista kolekcija</h3>
+    <button (click)="onListCollections()" [disabled]="loadingCreate">Osveži listu</button>
+
+    <div *ngIf="loadingCreate">⏳ U toku...</div>
+
+    <div *ngIf="collections.length > 0">
+      <ul class="collection-list">
+        <li *ngFor="let col of collections">
+          <strong>{{ col.name }}</strong>
+          <p>ID: {{ col.id }}</p>
+          <p>Timestamp: {{ col.timestamp }}</p>
+        </li>
+      </ul>
+    </div>
+
+    <div *ngIf="!loadingCreate && collections.length === 0">⚠️ Nema dostupnih kolekcija.</div>
+  </section>
+
+  <hr />
+
+  <!-- 3️⃣ Detalji kolekcije -->
+  <section class="collection-section" >
+    <h3>Brisanje kolekcije</h3>
+    <form (ngSubmit)="onDropCollection()" class="collection-form">
+      <label>Naziv kolekcije:</label>
+      <input type="text" [(ngModel)]="dropParams.name" name="dropCollection" required />
+      <button type="submit" [disabled]="loadingDrop">Obrisi kolekciju</button>
+    </form>
+    <div *ngIf="messageDrop" class="message">{{ messageDrop }}</div>
+    <div *ngIf="errorDrop" class="error">{{ errorDrop }}</div>
+  </section>
+</div>

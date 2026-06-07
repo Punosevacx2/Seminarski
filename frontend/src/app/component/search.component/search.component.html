@@ -1,0 +1,50 @@
+<div class="search-container">
+  <div class="logo-wrapper">
+    <img src="logo.png" alt="Logo" class="app-logo" />
+  </div>
+  <h2>Pretraga</h2>
+
+  <div class="form-group">
+    <label>Tekst za pretragu:</label>
+    <input
+      type="text"
+      [(ngModel)]="query"
+      name="text"
+      placeholder="Unesite tekst..."
+      [disabled]="loading"
+      required
+      (keyup.enter)="onEnter()"
+    />
+  </div>
+
+  <div class="btn-row">
+    <button type="button" (click)="run('semantic')" [disabled]="loading">Semantička</button>
+    <button type="button" (click)="run('fulltext')" [disabled]="loading">Full-text</button>
+    <button type="button" (click)="run('hybrid')"  [disabled]="loading">Hybridna</button>
+
+    <span class="mode-pill" *ngIf="activeMode">
+      Mod: {{ activeMode === 'semantic' ? 'Semantička'
+              : activeMode === 'fulltext' ? 'Full-text' : 'Hybridna' }}
+    </span>
+  </div>
+
+  <div *ngIf="loading" class="loading">⏳ Pretraga u toku...</div>
+  <div *ngIf="error" class="error">{{ error }}</div>
+
+  <div *ngIf="results.length > 0" class="results">
+    <h3>Rezultati ({{ results.length }})</h3>
+
+    <div class="recipe-grid">
+      <div class="recipe-card" *ngFor="let r of results" (click)="openRecipeDetail(r)">
+        <h4>{{ r.title || 'Bez naslova' }}</h4>
+        <p>{{ r.description || r.snippet || 'Nema opisa.' }}</p>
+        <small>ID: {{ r.id }}</small>
+
+        <div class="progress-bar-container">
+          <div class="progress-bar" [style.width.%]="scorePct(r)"></div>
+        </div>
+        <small>{{ scorePct(r) | number:'1.0-1' }}% relevantnost</small>
+      </div>
+    </div>
+  </div>
+</div>

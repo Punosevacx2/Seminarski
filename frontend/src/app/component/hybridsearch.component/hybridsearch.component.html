@@ -1,0 +1,62 @@
+<div class="search-container">
+  <h2>Napredna hibridna pretraga</h2>
+
+  <form (ngSubmit)="onSearch()" class="search-form">
+    <div class="form-group">
+      <label>Tekst za pretragu:</label>
+      <input type="text" [(ngModel)]="paramshybrid.text" name="text" placeholder="Unesite tekst..." required />
+    </div>
+
+    <div class="form-group">
+      <label>Broj rezultata (topK):</label>
+      <input type="number" [(ngModel)]="paramshybrid.topK" name="topK" min="1" placeholder="npr. 5" />
+    </div>
+
+    <div class="form-group">
+      <label>Naziv kolekcije:</label>
+      <input type="text" [(ngModel)]="paramshybrid.collectionName" name="collectionName" placeholder="npr. Proba1" required />
+    </div>
+
+    <div class="form-group">
+      <label>Metric Type:</label>
+      <select [(ngModel)]="paramshybrid .metricType" name="metricType">
+        <option value="L2">L2 (Euclidean)</option>
+        <option value="COSINE">Cosine</option>
+        <option value="IP">Inner Product</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Index Params (JSON):</label>
+      <input type="text" [(ngModel)]="indexParamsInput" name="indexParams" placeholder='npr. {"nprobe":128}' />
+    </div>
+
+    <div class="form-group">
+      <label>Filter (filter):</label>
+      <input type="text" [(ngModel)]="paramshybrid.filter" name="filter"  placeholder="id > 10000" />
+    </div>
+
+    <button type="submit" [disabled]="loading">Pretraži</button>
+  </form>
+
+  <div *ngIf="loading" class="loading">⏳ Pretraga u toku...</div>
+  <div *ngIf="error" class="error">{{ error }}</div>
+
+ <div *ngIf="results.length > 0" class="results">
+  <h3>Rezultati:</h3>
+
+  <div class="recipe-grid">
+    <div class="recipe-card" *ngFor="let r of results" (click)="openRecipeDetail(r)">
+      <h4>{{ r.title || 'Bez naslova' }}</h4>
+      <p>{{ r.description || 'Nema opisa.' }}</p>
+      <small>ID: {{ r.id }}</small>
+
+      <!-- Progress bar -->
+      <div class="progress-bar-container">
+        <div class="progress-bar" [style.width.%]="r.score * 100"></div>
+      </div>
+      <small>{{ (r.score * 100) | number:'1.0-1' }}% sličnost</small>
+    </div>
+  </div>
+</div>
+</div>
