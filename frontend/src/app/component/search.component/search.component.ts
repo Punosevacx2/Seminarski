@@ -25,6 +25,7 @@ export class SearchComponent implements OnInit{
   constructor(private milvusService: MilvusService, private router: Router) {}
 
 ngOnInit(): void {
+  this.activeMode = 'semantic';
   const body= {"text": "Najbolji recepti"}
     this.milvusService.searchSemantic(body).subscribe({
       next: (res: any) => {
@@ -85,7 +86,14 @@ ngOnInit(): void {
 
   // Lep prikaz % i kad score nije u [0,1]
   scorePct(r: any): number {
-    const s = Number(r?.score ?? 0);
+    let s: number;
+    if (this.activeMode === 'semantic') {
+      s = Number(r?.semantic_score ?? 0);
+    } else if (this.activeMode === 'fulltext') {
+      s = Number(r?.fulltext_score ?? 0);
+    } else {
+      s = Number(r?.hybrid_score ?? 0);
+    }
     if (Number.isNaN(s)) return 0;
     return s <= 1 ? s * 100 : Math.min(100, (s / (s + 10)) * 100);
   }
