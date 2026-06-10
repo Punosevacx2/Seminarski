@@ -60,7 +60,6 @@ pip install -r requirements.txt
 Kreiraj `.env` fajl u `backend/` direktorijumu:
 
 ```env
-DATABASE_URL=sqlite:///./books.db
 MILVUS_HOST=localhost
 MILVUS_PORT=19530
 ```
@@ -81,12 +80,12 @@ python -m app.scripts.seed_milvus
 Pokreni backend server:
 
 ```bash
-uvicorn app.main:app --reload
+uvicorn app.main:app --reload --port 8001
 ```
 
-Backend je dostupan na: `http://localhost:8000`
+Backend je dostupan na: `http://localhost:8001`
 
-API dokumentacija: `http://localhost:8000/docs`
+API dokumentacija: `http://localhost:8001/docs`
 
 ### 3. Frontend
 
