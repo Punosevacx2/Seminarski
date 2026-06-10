@@ -6,3 +6,4 @@ pymilvus
 sentence-transformers
 pandas
 datasets
+psycopg2-binary
