@@ -47,6 +47,7 @@ docker run -d --name milvus-standalone \
   -p 9091:9091 \
   milvusdb/milvus:latest standalone
 ```
+Postoji yml fajl za Milvus
 
 ### 2. Backend
 
